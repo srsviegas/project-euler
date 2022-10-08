@@ -20,13 +20,12 @@ int simpler_collatz(unsigned long n) {
 }
 
 int collatz(unsigned long n) {
-    /* If n is too big for the array size, returns the result from a simpler
+    /* If n is too large for the array size, returns the result from a simpler
     version of the collatz function */
     if (n >= 100000000)
         return simpler_collatz(n);
 
-    /* Checks if the current Collatz chain size is already in the list.
-    If it is, returns the size stored. */
+    /* If the next chain size is already on the list, returns the stored size. */
     if (chainList[n] != 0)
         return chainList[n];
 
@@ -41,7 +40,7 @@ int collatz(unsigned long n) {
         chainList[n] = 1 + collatz(n/2);
     else
         chainList[n] = 1 + collatz(3*n+1);
-    // Returns 1 + the size of the rest of the chain
+    
     return chainList[n];
 }
 

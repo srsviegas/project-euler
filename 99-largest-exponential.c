@@ -38,7 +38,6 @@ int main() {
 
     printf("line: %d", largest[1]);
 
-    time = clock() - time;
-    printf("\n\ntime elapsed: %f", (double)(time)/CLOCKS_PER_SEC);
+    printf("\n\ntime elapsed: %f", (double)(clock() - time)/CLOCKS_PER_SEC);
     return 0;
 }

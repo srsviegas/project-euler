@@ -5,12 +5,7 @@ How many Lychrel numbers are there below ten-thousand?
 MAX = 10_000
 
 def is_palindrome(n):
-    n = str(n)
-    firstPart = n[:len(n)//2]
-    lastPart = n[len(n)//2:]
-    if len(n) % 2:
-        lastPart = lastPart[1:]
-    return firstPart == lastPart[::-1]
+    return (str(n) == str(n)[::-1])
 
 def is_lyrchrel(n):
     for _ in range(50):

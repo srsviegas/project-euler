@@ -91,4 +91,5 @@ if __name__ == "__main__":
             winsP1 += 1
             print(p1.rank, p2.rank)
 
-    print(winsP1)
+    print(f"\n----> PLAYER 1 won [{winsP1}] times <----")
+    print(f"      PLAYER 2 won [{1000-winsP1}] times\n")

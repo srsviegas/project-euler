@@ -19,11 +19,12 @@ seen = set()
 
 for i in primes:
     # Skip number if it was already seen in a permutation list
-    if i in seen: continue
+    if i in seen:
+        continue
     # Generates all prime permutations of the number
     perm = set(int(''.join(p)) for p in permutations(str(i)) if int(''.join(p)) in primes)
     if (len(perm) > 2):
         for a, b in product(perm, perm):
             if (a < b) and (b + (b - a) in perm):
-                print([a, b, b + b - a], str(a)+str(b)+str(2*b-a))
+                print([a, b, 2*b-a], f'{a}{b}{2*b-a}')
     seen = seen.union(perm)

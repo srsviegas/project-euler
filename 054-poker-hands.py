@@ -57,27 +57,29 @@ class Hand:
         self.values = sorted(Hand.values[c[0]] for c in self.cards)
         self.rank = getRank(self)
     
-    def play(self, p2):
-        """ Compare two hands and return the winner """
-        p1 = self
+    def __repr__(self) -> str:
+        return f"{self.cards} {self.rank}"
+
+    def play(self, other):
+        """ Compare two hands and return true if self wins """
         # Winner is the one with the highest rank
-        if Hand.ranks[p1.rank[0]] > Hand.ranks[p2.rank[0]]:
-            return 1
-        elif Hand.ranks[p2.rank[0]] > Hand.ranks[p1.rank[0]]:
-            return 2
+        if Hand.ranks[self.rank[0]] > Hand.ranks[other.rank[0]]:
+            return True
+        elif Hand.ranks[other.rank[0]] > Hand.ranks[self.rank[0]]:
+            return False
         # Same rank:
         else:
             # Winner is the one with the rank made of the highest value
-            if p1.rank[1] > p2.rank[1]:
-                return 1
-            elif p2.rank[1] > p1.rank[1]:
-                return 2
+            if self.rank[1] > other.rank[1]:
+                return True
+            elif other.rank[1] > self.rank[1]:
+                return False
             # Winner is the one with the highest card
-            v = max(set(p1.values).symmetric_difference(set(p2.values)))
-            if v in p1.values:
-                return 1
+            v = max(set(self.values).symmetric_difference(set(other.values)))
+            if v in self.values:
+                return True
             else:
-                return 2 
+                return False
 
 
 if __name__ == "__main__":
@@ -85,11 +87,11 @@ if __name__ == "__main__":
     winsP1 = 0
     for round in rounds:
         round = round.split()
-        p1 = Hand((round[:5]))
-        p2 = Hand((round[5:]))
-        if p1.play(p2) == 1:
+        p1 = Hand(round[:5])
+        p2 = Hand(round[5:])
+        if p1.play(p2):
             winsP1 += 1
-            print(p1.rank, p2.rank)
+            print(f'{p1}\n{p2}\n')
 
     print(f"\n----> PLAYER 1 won [{winsP1}] times <----")
     print(f"      PLAYER 2 won [{1000-winsP1}] times\n")

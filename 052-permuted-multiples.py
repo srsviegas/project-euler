@@ -9,9 +9,9 @@ from itertools import count
 
 for x in count(123456):
     found = True
-    xSet = set(str(x))
+    digits = set(str(x))
     for m in range(6, 0, -1):
-        if xSet != set(str(x*m)):
+        if digits != set(str(x*m)):
             found = False
             break
     if found:

@@ -16,8 +16,10 @@ start_t = time()
 
 MAX = 10**8
 
+
 def is_palindrome(n):
     return (str(n) == str(n)[::-1])
+
 
 squares = tuple(n*n for n in range(1, int(sqrt(MAX))))
 
@@ -25,7 +27,8 @@ squareSums = []
 for i, x in enumerate(squares):
     for y in squares[i+1:]:
         x += y
-        if (x > MAX): break
+        if (x > MAX):
+            break
         if (x not in squareSums) and is_palindrome(x):
             squareSums.append(x)
 

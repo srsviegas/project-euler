@@ -36,29 +36,29 @@ def decipher(key, ciphertext):
     return plaintext
 
 
+if __name__ == "__main__"
+    with open("059-cipher.txt", "r") as file:
+        ciphertext = list(int(c) for c in file.readline().split(','))
 
-with open("059-cipher.txt", "r") as file:
-    ciphertext = list(int(c) for c in file.readline().split(','))
+    possible_keys = product('abcdefghijklmnopqrstuvwxyz', repeat=3)
 
-possible_keys = product('abcdefghijklmnopqrstuvwxyz', repeat=3)
+    functionable_keys = []
+    invalid_chars = [[], [], []]
 
-functionable_keys = []
-invalid_chars = [[], [], []]
+    for key in possible_keys:
+        if (key[0] in invalid_chars[0] or
+            key[1] in invalid_chars[1] or
+            key[2] in invalid_chars[2]):
+            continue
+        outcome = try_key(key, ciphertext)
+        if outcome[0]:
+            functionable_keys.append((key, outcome[1]))
+        else:
+            invalid_chars[outcome[1]].append(key[outcome[1]])
 
-for key in possible_keys:
-    if (key[0] in invalid_chars[0] or
-        key[1] in invalid_chars[1] or
-        key[2] in invalid_chars[2]):
-        continue
-    outcome = try_key(key, ciphertext)
-    if outcome[0]:
-        functionable_keys.append((key, outcome[1]))
-    else:
-        invalid_chars[outcome[1]].append(key[outcome[1]])
+    correct_key = max(functionable_keys, key=lambda k: k[1])[0]
+    plaintext = decipher(correct_key, ciphertext)
+    ascii_sum = sum(ord(c) for c in plaintext)
 
-correct_key = max(functionable_keys, key=lambda k: k[1])[0]
-plaintext = decipher(correct_key, ciphertext)
-ascii_sum = sum(ord(c) for c in plaintext)
-
-print(f'key: "{"".join(correct_key)}" \n\n{plaintext}\n')
-print(f'answer: {ascii_sum}')
+    print(f'key: "{"".join(correct_key)}" \n\n{plaintext}\n')
+    print(f'answer: {ascii_sum}')

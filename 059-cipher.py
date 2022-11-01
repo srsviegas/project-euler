@@ -36,7 +36,7 @@ def decipher(key, ciphertext):
     return plaintext
 
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     with open("059-cipher.txt", "r") as file:
         ciphertext = list(int(c) for c in file.readline().split(','))
 

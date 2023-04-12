@@ -26,6 +26,7 @@ def is_snum(num, sqrt, accumulator=0):
                 return True
         return False
 
+
 start_t = time()
 
 snumber_sum = 41333
